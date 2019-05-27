@@ -9,7 +9,7 @@ import numpy as np
 
 ### Input parameters (these should be the same as in ising_mc.py): ###
 T_list = np.linspace(5.0,0.5,25) #temperature list
-L = 8                            #linear size of the lattice
+L = 16                        #linear size of the lattice
 N_spins = L**2                   #total number of spins
 J = 1                            #coupling parameter
 
