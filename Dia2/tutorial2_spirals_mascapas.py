@@ -58,7 +58,7 @@ fig.savefig('spiral_data.pdf')
 ##################### DEFINE THE NETWORK ARCHITECTURE ######################
 ############################################################################
 
-##// OUR EQUATIONS ARE: z^l and a^l are 1xn_l ROW VECTORS  for each datapoint, or mxn_l matrix where each row is the corresponding for the ith data point
+##// OUR EQUATIONS ARE: z^l and a^l are 1xn_l+1 ROW VECTORS  for each datapoint, or mxn_l+1 matrix where each row is the corresponding for the ith data point
 #//      z^l = a^(l-1) W^l + b^l
 #//      a^l = g(z^l)
 
@@ -68,22 +68,23 @@ fig.savefig('spiral_data.pdf')
 x = tf.placeholder(tf.float32, [None, 2]) # input data // Each data point, of which now we have None, is made of 2 atributes, HENCE 2 NEURONS IN THE FIRST LAYER: row vector
 y = tf.placeholder(tf.int32,[None])       # labels // A vector with no entries
 
+n2 = 4 #// Size of added Layer 2
 ### Layer 1: ###
-W1 = tf.Variable( tf.random_normal([2, K], mean=0.0, stddev=0.01, dtype=tf.float32) ) ## // 2 Neuros in input layer, K neurons in next/output layer, 
-b1 = tf.Variable( tf.zeros([K]) )
-z1 = tf.matmul(x, W1) + b1 ## // The z for each datapoint is a 1xn_l ROW VECTOR
+W1 = tf.Variable( tf.random_normal([2, n2], mean=0.0, stddev=0.01, dtype=tf.float32) ) #// Changed K by n2
+b1 = tf.Variable( tf.zeros([n2]) ) #// Changed K by n2
+z1 = tf.matmul(x, W1) + b1 ## // The z for each datapoint is a 1xn_l+1 ROW VECTOR. x = a0
 a1 = tf.nn.sigmoid( z1 )
 
 
-#/// ADITION Layer 2
-W1 = tf.Variable( tf.random_normal([, K], mean=0.0, stddev=0.01, dtype=tf.float32) ) 
-b1 = tf.Variable( tf.zeros([K]) )
-z1 = tf.matmul(x, W1) + b1 
-a1 = tf.nn.sigmoid( z1 )
+#/// ADITION: Layer 2
+W2 = tf.Variable( tf.random_normal([n2, K], mean=0.0, stddev=0.01, dtype=tf.float32) ) 
+b2 = tf.Variable( tf.zeros([K]) )
+z2 = tf.matmul(a1, W2) + b2 #// Changed x by a1
+a2 = tf.nn.sigmoid( z2 )
 
 
 ### Network output: ###
-aL = a1
+aL = a2  # // Changed output layer to a2
 
 ### Cost function: ### // Cross entropy function, TODO: look it up
 ### (measures how far off our model is from the labels) ###
@@ -171,3 +172,4 @@ for epoch in range(N_epochs):
 plt.savefig('spiral_results.pdf') # Save the figure showing the results in the current directory
 
 plt.show()
+plt.pause(5)
