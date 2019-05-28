@@ -27,8 +27,8 @@ plt.ion() # turn on interactive mode (for plotting)
 ####################### CREATE AND PLOT THE DATA SET #######################
 ############################################################################
 
-N = 50 # number of points per branch
-K = 3  # number of branches
+N = 100 # number of points per branch
+K = 5  # number of branches
 
 N_train = N*K # total number of points in the training set
 x_train = np.zeros((N_train,2)) # matrix containing the 2-dimensional datapoints  // Notice that this isn't flattened: basically a vector of coordinates
@@ -68,23 +68,29 @@ fig.savefig('spiral_data.pdf')
 x = tf.placeholder(tf.float32, [None, 2]) # input data // Each data point, of which now we have None, is made of 2 atributes, HENCE 2 NEURONS IN THE FIRST LAYER: row vector
 y = tf.placeholder(tf.int32,[None])       # labels // A vector with no entries
 
-n2 = 4 #// Size of added Layer 2
+n2 = 20 #// Size of added Layer 2
 ### Layer 1: ###
 W1 = tf.Variable( tf.random_normal([2, n2], mean=0.0, stddev=0.01, dtype=tf.float32) ) #// Changed K by n2
 b1 = tf.Variable( tf.zeros([n2]) ) #// Changed K by n2
 z1 = tf.matmul(x, W1) + b1 ## // The z for each datapoint is a 1xn_l+1 ROW VECTOR. x = a0
 a1 = tf.nn.sigmoid( z1 )
 
-
+n3 = K
 #/// ADITION: Layer 2
-W2 = tf.Variable( tf.random_normal([n2, K], mean=0.0, stddev=0.01, dtype=tf.float32) ) 
-b2 = tf.Variable( tf.zeros([K]) )
+W2 = tf.Variable( tf.random_normal([n2, n3], mean=0.0, stddev=0.01, dtype=tf.float32) ) 
+b2 = tf.Variable( tf.zeros([n3]) )
 z2 = tf.matmul(a1, W2) + b2 #// Changed x by a1
 a2 = tf.nn.sigmoid( z2 )
 
+#/// ADITION: Layer 3
+#W3 = tf.Variable( tf.random_normal([n3, K], mean=0.0, stddev=0.01, dtype=tf.float32) ) 
+#b3 = tf.Variable( tf.zeros([K]) )
+#z3 = tf.matmul(a2, W3) + b3 #// Changed x by a1
+#a3 = tf.nn.sigmoid( z3 )
+
 
 ### Network output: ###
-aL = a2  # // Changed output layer to a2
+aL = a2  # // Changed output layer to a3
 
 ### Cost function: ### // Cross entropy function, TODO: look it up
 ### (measures how far off our model is from the labels) ###
@@ -95,7 +101,7 @@ cost_func = cross_entropy
 #cost_func = tf.reduce_mean(tf.pow(aL - y_onehot, 2))
 
 ### Use backpropagation to minimize the cost function using the gradient descent algorithm: ###
-learning_rate  = 1.0 # hyperparameter // stepsize in gradient descent?
+learning_rate  = 1 # hyperparameter // stepsize in gradient descent?
 train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost_func) # // what is this and why is it called that
 
 N_epochs = 20000 # number of times to run gradient descent
