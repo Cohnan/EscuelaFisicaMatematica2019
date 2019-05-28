@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ### Input parameters (these should be the same as in ising_mc.py): ###
-T_list = np.linspace(5.0,0.5,25) #temperature list
-L = 16                        #linear size of the lattice
+T_list = np.linspace(5.0,0.5,50) #temperature list
+L = 20                      #linear size of the lattice
 N_spins = L**2                   #total number of spins
 J = 1                            #coupling parameter
 
