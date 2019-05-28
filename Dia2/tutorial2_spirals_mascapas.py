@@ -92,6 +92,7 @@ y_onehot = tf.one_hot(y,depth=K) # labels are converted to one-hot representatio
 eps=0.0000000001 # to prevent the logs from diverging
 cross_entropy = tf.reduce_mean(-tf.reduce_sum( y_onehot * tf.log(aL+eps) +  (1.0-y_onehot )*tf.log(1.0-aL +eps) , reduction_indices=[1]))
 cost_func = cross_entropy
+#cost_func = tf.reduce_mean(tf.pow(aL - y_onehot, 2))
 
 ### Use backpropagation to minimize the cost function using the gradient descent algorithm: ###
 learning_rate  = 1.0 # hyperparameter // stepsize in gradient descent?
@@ -103,7 +104,7 @@ N_epochs = 20000 # number of times to run gradient descent
 ################################## TRAINING ##################################
 ##############################################################################
 sess = tf.Session()
-sess.run(tf.global_variables_initializer())
+sess.run(tf.global_variables_initializer()) 	####### TODO I BELIEVE IT IS HERE WHERE WE TELL
 
 epoch_list    = []
 cost_training = []
@@ -151,8 +152,8 @@ for epoch in range(N_epochs):
     
     ### Update the plot and print results every 500 epochs: ###
     if epoch % 500 == 0:
-        cost = sess.run(cost_func,feed_dict={x:x_train, y:y_train})
-        NN_output = sess.run(aL,feed_dict={x:x_train, y:y_train})   # // Thi
+        cost = sess.run(cost_func,feed_dict={x:x_train, y:y_train}) ##### // 
+        NN_output = sess.run(aL,feed_dict={x:x_train, y:y_train})   ## ///// PREDICTION MADE
         predicted_class = np.argmax(NN_output, axis=1)
         accuracy = np.mean(predicted_class == y_train)
     
@@ -172,4 +173,4 @@ for epoch in range(N_epochs):
 plt.savefig('spiral_results.pdf') # Save the figure showing the results in the current directory
 
 plt.show()
-plt.pause(5)
+plt.pause(20)

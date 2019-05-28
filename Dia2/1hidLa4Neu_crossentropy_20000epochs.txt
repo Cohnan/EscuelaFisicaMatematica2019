@@ -1,0 +1,160 @@
+Iteration 0:
+  Training cost 1.955088
+  Training accuracy 0.333333
+
+Iteration 500:
+  Training cost 1.415962
+  Training accuracy 0.513333
+
+Iteration 1000:
+  Training cost 1.050202
+  Training accuracy 0.733333
+
+Iteration 1500:
+  Training cost 0.825634
+  Training accuracy 0.920000
+
+Iteration 2000:
+  Training cost 0.748588
+  Training accuracy 0.900000
+
+Iteration 2500:
+  Training cost 0.710957
+  Training accuracy 0.893333
+
+Iteration 3000:
+  Training cost 0.685387
+  Training accuracy 0.893333
+
+Iteration 3500:
+  Training cost 0.663401
+  Training accuracy 0.893333
+
+Iteration 4000:
+  Training cost 0.642330
+  Training accuracy 0.900000
+
+Iteration 4500:
+  Training cost 0.623495
+  Training accuracy 0.906667
+
+Iteration 5000:
+  Training cost 0.606890
+  Training accuracy 0.913333
+
+Iteration 5500:
+  Training cost 0.577992
+  Training accuracy 0.920000
+
+Iteration 6000:
+  Training cost 0.571965
+  Training accuracy 0.906667
+
+Iteration 6500:
+  Training cost 0.573137
+  Training accuracy 0.906667
+
+Iteration 7000:
+  Training cost 0.568288
+  Training accuracy 0.906667
+
+Iteration 7500:
+  Training cost 0.564269
+  Training accuracy 0.906667
+
+Iteration 8000:
+  Training cost 0.560924
+  Training accuracy 0.913333
+
+Iteration 8500:
+  Training cost 0.558085
+  Training accuracy 0.913333
+
+Iteration 9000:
+  Training cost 0.555635
+  Training accuracy 0.913333
+
+Iteration 9500:
+  Training cost 0.553497
+  Training accuracy 0.913333
+
+Iteration 10000:
+  Training cost 0.551612
+  Training accuracy 0.913333
+
+Iteration 10500:
+  Training cost 0.549941
+  Training accuracy 0.913333
+
+Iteration 11000:
+  Training cost 0.548448
+  Training accuracy 0.913333
+
+Iteration 11500:
+  Training cost 0.547105
+  Training accuracy 0.913333
+
+Iteration 12000:
+  Training cost 0.545887
+  Training accuracy 0.906667
+
+Iteration 12500:
+  Training cost 0.544775
+  Training accuracy 0.906667
+
+Iteration 13000:
+  Training cost 0.543751
+  Training accuracy 0.906667
+
+Iteration 13500:
+  Training cost 0.542797
+  Training accuracy 0.906667
+
+Iteration 14000:
+  Training cost 0.541900
+  Training accuracy 0.906667
+
+Iteration 14500:
+  Training cost 0.541049
+  Training accuracy 0.906667
+
+Iteration 15000:
+  Training cost 0.540232
+  Training accuracy 0.906667
+
+Iteration 15500:
+  Training cost 0.539441
+  Training accuracy 0.906667
+
+Iteration 16000:
+  Training cost 0.538673
+  Training accuracy 0.906667
+
+Iteration 16500:
+  Training cost 0.537923
+  Training accuracy 0.906667
+
+Iteration 17000:
+  Training cost 0.537192
+  Training accuracy 0.906667
+
+Iteration 17500:
+  Training cost 0.536479
+  Training accuracy 0.900000
+
+Iteration 18000:
+  Training cost 0.535789
+  Training accuracy 0.893333
+
+Iteration 18500:
+  Training cost 0.535115
+  Training accuracy 0.893333
+
+Iteration 19000:
+  Training cost 0.534464
+  Training accuracy 0.893333
+
+Iteration 19500:
+  Training cost 0.533838
+  Training accuracy 0.893333
+

@@ -1,0 +1,162 @@
+HELLO
+Tensor("Sigmoid_1:0", shape=(?, 3), dtype=float32)
+Iteration 0:
+  Training cost 0.246025
+  Training accuracy 0.333333
+
+Iteration 500:
+  Training cost 0.222095
+  Training accuracy 0.533333
+
+Iteration 1000:
+  Training cost 0.214142
+  Training accuracy 0.513333
+
+Iteration 1500:
+  Training cost 0.174923
+  Training accuracy 0.486667
+
+Iteration 2000:
+  Training cost 0.165288
+  Training accuracy 0.506667
+
+Iteration 2500:
+  Training cost 0.163390
+  Training accuracy 0.506667
+
+Iteration 3000:
+  Training cost 0.161371
+  Training accuracy 0.513333
+
+Iteration 3500:
+  Training cost 0.158890
+  Training accuracy 0.526667
+
+Iteration 4000:
+  Training cost 0.155739
+  Training accuracy 0.540000
+
+Iteration 4500:
+  Training cost 0.151402
+  Training accuracy 0.580000
+
+Iteration 5000:
+  Training cost 0.145398
+  Training accuracy 0.620000
+
+Iteration 5500:
+  Training cost 0.137848
+  Training accuracy 0.680000
+
+Iteration 6000:
+  Training cost 0.129749
+  Training accuracy 0.700000
+
+Iteration 6500:
+  Training cost 0.122293
+  Training accuracy 0.713333
+
+Iteration 7000:
+  Training cost 0.116127
+  Training accuracy 0.753333
+
+Iteration 7500:
+  Training cost 0.111295
+  Training accuracy 0.773333
+
+Iteration 8000:
+  Training cost 0.107557
+  Training accuracy 0.793333
+
+Iteration 8500:
+  Training cost 0.104634
+  Training accuracy 0.820000
+
+Iteration 9000:
+  Training cost 0.102295
+  Training accuracy 0.840000
+
+Iteration 9500:
+  Training cost 0.100375
+  Training accuracy 0.820000
+
+Iteration 10000:
+  Training cost 0.098758
+  Training accuracy 0.826667
+
+Iteration 10500:
+  Training cost 0.097362
+  Training accuracy 0.813333
+
+Iteration 11000:
+  Training cost 0.096126
+  Training accuracy 0.813333
+
+Iteration 11500:
+  Training cost 0.095005
+  Training accuracy 0.813333
+
+Iteration 12000:
+  Training cost 0.093966
+  Training accuracy 0.826667
+
+Iteration 12500:
+  Training cost 0.092984
+  Training accuracy 0.826667
+
+Iteration 13000:
+  Training cost 0.092037
+  Training accuracy 0.826667
+
+Iteration 13500:
+  Training cost 0.091111
+  Training accuracy 0.826667
+
+Iteration 14000:
+  Training cost 0.090194
+  Training accuracy 0.826667
+
+Iteration 14500:
+  Training cost 0.089279
+  Training accuracy 0.826667
+
+Iteration 15000:
+  Training cost 0.088362
+  Training accuracy 0.840000
+
+Iteration 15500:
+  Training cost 0.087442
+  Training accuracy 0.840000
+
+Iteration 16000:
+  Training cost 0.086519
+  Training accuracy 0.840000
+
+Iteration 16500:
+  Training cost 0.085596
+  Training accuracy 0.840000
+
+Iteration 17000:
+  Training cost 0.084675
+  Training accuracy 0.840000
+
+Iteration 17500:
+  Training cost 0.083758
+  Training accuracy 0.846667
+
+Iteration 18000:
+  Training cost 0.082849
+  Training accuracy 0.846667
+
+Iteration 18500:
+  Training cost 0.081949
+  Training accuracy 0.846667
+
+Iteration 19000:
+  Training cost 0.081060
+  Training accuracy 0.840000
+
+Iteration 19500:
+  Training cost 0.080182
+  Training accuracy 0.840000
+
