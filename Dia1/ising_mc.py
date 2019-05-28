@@ -13,22 +13,13 @@ import time
 
 _UNDEFINED = -11111111
 CUR_ENERGIA = _UNDEFINED
-CUR_MAGNETI = _UNDEFINED
-n_sweeps = 0
+print("Hello " + str(CUR_ENERGIA))
 
 def updateEnergia(flipped_site): # Asume que el spin del sitio ya ha sido cambiado
-    global CUR_ENERGIA
     if CUR_ENERGIA == _UNDEFINED:
           CUR_ENERGIA = getEnergy()
     else:
           CUR_ENERGIA += 2*J*(spins[flipped_site]*spins[neighbours[flipped_site,0]] + spins[flipped_site]*spins[neighbours[flipped_site,1]] + spins[flipped_site]*spins[neighbours[flipped_site,2]] + spins[flipped_site]*spins[neighbours[flipped_site,3]])
-            
-def updateMagnetizacion(flipped_site): # Asume que el spin del sitio ya ha sido cambiado
-    global CUR_MAGNETI
-    if CUR_MAGNETI == _UNDEFINED:
-          CUR_MAGNETI = getEnergy()
-    else:
-          CUR_MAGNETI += 2*spins[flipped_site]
 
 ### Input parameters: ###
 T_list = np.linspace(5.0,0.5,int(input("Numero de pasos: "))) #temperature list
@@ -106,7 +97,13 @@ def sweep(): # Modified to update by itself the energy
     for i in range(N_spins):
         #randomly choose which spin to consider flipping:
         site = random.randint(0,N_spins-1)
+        #print(site)
         #calculate the change in energy for the proposed move:
+        #E_init = getEnergy()
+        #spins[site] = -spins[site] #flip the spin before calculating E_final
+        #E_final = getEnergy()
+        #spins[site] = -spins[site] #flip the spin back since we might not accept the move
+        #deltaE = E_final - E_init
         deltaE = 2*J*(spins[site]*spins[neighbours[site,0]] + spins[site]*spins[neighbours[site,1]] + spins[site]*spins[neighbours[site,2]] + spins[site]*spins[neighbours[site,3]]) # Añadido en reemplazo de las anteriores
         # *********************************************************************** #
         # ************       1c) REPLACE THE ABOVE FIVE LINES.        *********** #
@@ -114,10 +111,10 @@ def sweep(): # Modified to update by itself the energy
         # ************     USING ONLY THE FOUR NEAREST NEIGHBOURS     *********** #
         # *********************************************************************** #
     
-        if (deltaE <= 0) or (random.random() < np.exp(-deltaE/T)):  #Metropolis algorithm realization of the transition probability
-            #flip the spin:
-            spins[site] = -spins[site]
-            updateEnergia(site)
+        if (deltaE <= 0) or (random.random() < np.exp(-deltaE/T)):  #Metropolis algorithm
+          #flip the spin:
+          spins[site] = -spins[site]
+          updateEnergia(site)
     #end loop over i
 #end of sweep() function
 
@@ -127,10 +124,9 @@ def sweep(): # Modified to update by itself the energy
 t1 = time.clock() #for timing
 
             
-for T in T_list: 
+for T in T_list:
+        
     CUR_ENERGIA =  _UNDEFINED
-    CUR_MAGNETI =  _UNDEFINED
-    
     print('\nT = %f' %T)
     
     #open a file where observables will be recorded:
@@ -147,21 +143,21 @@ for T in T_list:
 
         #Write the observables to file:
         #energy = getEnergy() #Done by the sweep automatically
-        #mag    = getMag()
-        file_observables.write('%d \t %.8f \t %.8f \n' %(i, CUR_ENERGIA, CUR_MAGNETI))
+        mag    = getMag()
+        file_observables.write('%d \t %.8f \t %.8f \n' %(i, CUR_ENERGIA, mag))
 
         if animate:
-            #Display the current spin configuration:
-            plt.clf()
-            plt.imshow( spins.reshape((L,L)), cmap=bw_cmap, norm=colors.BoundaryNorm([-1,0,1], bw_cmap.N), interpolation='nearest' )
-            plt.xticks([])
-            plt.yticks([])
-            plt.title('%d x %d Ising model, T = %.3f' %(L,L,T))
-            plt.pause(0.01)
+          #Display the current spin configuration:
+          plt.clf()
+          plt.imshow( spins.reshape((L,L)), cmap=bw_cmap, norm=colors.BoundaryNorm([-1,0,1], bw_cmap.N), interpolation='nearest' )
+          plt.xticks([])
+          plt.yticks([])
+          plt.title('%d x %d Ising model, T = %.3f' %(L,L,T))
+          plt.pause(0.01)
         #end if
 
         if (i+1)%1000==0:
-            print('  %d sweeps complete' %(i+1))
+          print('  %d sweeps complete' %(i+1))
     #end loop over i
 
     file_observables.close()
