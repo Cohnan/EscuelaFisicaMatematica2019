@@ -10,19 +10,21 @@ import matplotlib.pyplot as plt
 
 red,blue,green = '#e85c47','#4173b2','#7dcca4'
 
-def EL(x,α):
+#// psi_al(x) = e^(-al x^2) => P(x) = e^(-2al x^2) 
+
+def EL(x,α): # // H = p^2/2 + x^2/2 applied o e^(-al x^2)
     return α + x**2*(0.5-2*α**2)
 
-def transition_probability(x,x̄,α):
+def transition_probability(x,x̄,α):   #// P() / P(x) Tr(x -> x̄) = e^
     return np.exp(-2*α*(x̄**2-x**2))
 
 def vmc(num_walkers,num_MC_steps,num_equil_steps,α,δ=1.0):
     
-    # initilaize walkers
+    # initilaize walkers   // Positions that will be the result of the sampling
     walkers = -0.5 + np.random.rand(num_walkers)
     
     # initialize energy and number of accepted updates
-    estimator = {'E':np.zeros(num_MC_steps-num_equil_steps)}
+    estimator = {'E':np.zeros(num_MC_steps-num_equil_steps)} #// Global variables
     num_accepted = 0
     
     for step in range(num_MC_steps):
@@ -38,7 +40,7 @@ def vmc(num_walkers,num_MC_steps,num_equil_steps,α,δ=1.0):
                 
             # measure energy
             if step >= num_equil_steps:
-                measure = step-num_equil_steps
+                measure = step-num_equil_steps  # // Number of measurement
                 estimator['E'][measure] = EL(walkers[i],α)
                 
     # output the acceptance ratio
