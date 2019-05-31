@@ -33,7 +33,7 @@ L                   = 4       #linear size of the system
 T                   = 2.269   #a temperature for which there are MC configurations stored in Data_ising2d/MC_results
 num_visible         = L*L     #number of visible nodes
 num_hidden          = 4       #number of hidden nodes
-nsteps              = 200000   #number of training steps (iterations over the mini-batches)
+nsteps              = 100000   #number of training steps (iterations over the mini-batches)
 learning_rate_start = 1e-3    #the learning rate will start at this value and decay exponentially
 bsize               = 100     #batch size
 num_gibbs           = 10      #number of Gibbs iterations (steps of contrastive divergence)
@@ -68,7 +68,7 @@ xtest         = np.loadtxt(testFileName)
 
 xtrain_randomized = np.random.permutation(xtrain) # random permutation of training data
 xtest_randomized  = np.random.permutation(xtest) # random permutation of test data
-iterations_per_epoch = xtrain.shape[0] / bsize  
+iterations_per_epoch = xtrain.shape[0] / bsize  #/// SO ONE EPOCH IS A TRAINING SESSION, TODO AFTER WHICH THE PARAMETERS ARE UPDATED because it is the data obtained in an epoch what we use to calculate the cost
 
 # Initialize the RBM class
 rbm = RBM(num_hidden=num_hidden, num_visible=num_visible, weights=weights, visible_bias=visible_bias,hidden_bias=hidden_bias, num_samples=num_samples) 
@@ -79,18 +79,18 @@ placeholders = Placeholders()
 placeholders.visible_samples = tf.placeholder(tf.float32, shape=(None, num_visible), name='v') # placeholder for training data
 
 total_iterations = 0 # starts at zero 
-ops.global_step  = tf.Variable(total_iterations, name='global_step_count', trainable=False)
+ops.global_step  = tf.Variable(total_iterations, name='global_step_count', trainable=False)     #/// This is the working variable for the total_iterations
 learning_rate    = tf.train.exponential_decay(
     learning_rate_start,
     ops.global_step,
-    100 * xtrain.shape[0]/bsize,
+    100 * xtrain.shape[0]/bsize,			# /// BSIZE appearance
     1.0 # decay rate = 1 means no decay
 )
   
 cost      = rbm.neg_log_likelihood_forGrad(placeholders.visible_samples, num_gibbs=num_gibbs)
 optimizer = tf.train.AdamOptimizer(learning_rate, epsilon=1e-2)
 ops.lr    = learning_rate
-ops.train = optimizer.minimize(cost, global_step=ops.global_step)
+ops.train = optimizer.minimize(cost, global_step=ops.global_step)   
 ops.init  = tf.group(tf.initialize_all_variables(), tf.initialize_local_variables())
 
 # Define the negative log-likelihood
@@ -112,11 +112,11 @@ for ii in range(nsteps):
         bcount = 0
         xtrain_randomized = np.random.permutation(xtrain)
 
-    batch     =  xtrain_randomized[ bcount*bsize: bcount*bsize+ bsize,:]
+    batch     =  xtrain_randomized[ bcount*bsize: bcount*bsize+ bsize,:]    #/// A BATCH IS SELECTED FROM THE DATA, the next bsize'd set of data from the (desorganized) training set
     bcount    += 1
     feed_dict =  {placeholders.visible_samples: batch}
 
-    _, num_steps = sess.run([ops.train, ops.global_step], feed_dict=feed_dict)
+    _, num_steps = sess.run([ops.train, ops.global_step], feed_dict=feed_dict)		#/// Apparently this reduces num_steps, but I don't know by how much
 
     if num_steps % iterations_per_epoch == 0:
         lz = sess.run(logZ)
