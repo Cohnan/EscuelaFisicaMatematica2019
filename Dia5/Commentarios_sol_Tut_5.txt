@@ -1,0 +1,16 @@
+Sebastian Camilo Puerto Galindo: sc.puerto10@uniandes.edu.co
+Universidad de los Andes, 201910
+Escuela de Fisica Matemtica X: Machine Learning for Quantum Matter and Technology
+Instructors> R. Melko, J. Carrasquilla, E. Inack, G. Torlai
+
+	Tutorial 5 Solution
+
+Note: 
+num_MC_steps = 30000 #// Number of points with which we will approximate the current probability distribution e^(-2 al x^2)
+num_walkers = 400   #// Number of times we will do the aproximation, i.e. we are approximating the distribution, for each alpha, this number of times. This is required to get a standard deviation in the variational energy, which will help us use the minimum variance principle to determine if our minimum E_var function is also an eigenstate.
+
+1. Usando la funcion de onda variacional psi_al(x) = e^(-al x^2), we know that the ground state is given by  al=0.5. When plotting the expected value of the variational energy E_var for different alpha (by sampling using MC and averaging), the stored image shows that at al = 0.5 E_var shows a (at least local) minimum, therefore the variational energy, at least locally, will not be below the ground state energy.
+
+2. The standard deviation increases the further we are from alpha = 0.5. This is desired because it allows us to reinforce that the probability density of minimum energy is also an eigenstate, the minimum energy one. This result is expected by the Minimum Variance Principle, which tells us that the variance or standard deviation for the variational energy is 0 when evaluated in eigenvalues of the observable (explained by the fact that any other state is a combination of this eigenstates, so it is only for this states where the expected value has a single prefered value). TODO: what happens if the number of walkers is increased; I expect this to converge to a value
+
+3. The training does find the optimum value fo alpha = 0.5, which we know to be the answer. If the learning rate was even 0.5 of higher, instead of the proposed 0.1, an overflow occured when trying to calculate the transition probabilities for a metropolis step; a learning rate of 0.2 found the 0.5 optimum value with the same precision (6 significant figures) in almost a third of the iterations.

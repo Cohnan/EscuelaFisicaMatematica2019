@@ -10,21 +10,22 @@ import matplotlib.pyplot as plt
 red,blue,green = '#e85c47','#4173b2','#7dcca4'
 ############# PARAMETERS DEFINITION #######################################
 α = 0.1
-num_walkers = 500
+num_walkers = 100
 num_MC_steps = 100
 
 num_sgd_steps =100   # number of times to perform SGD
 num_equil_steps = 10
 
-learning_rate = 0.1
+learning_rate = 0.15
 
 ########### DEFINITION OF THE LOCAL ENERGY ############################
 def EL(x,α):
-    return 0.5*α + 0.5*x**2*(1-α**2)
+    return α + x**2*(0.5-2*α**2)
 
 ########### DEFINITION OF THE TRANSITION PROBABILITY ############################
 def transition_probability(x,x̄,α):
-    return np.exp(-α*(x̄**2-x**2))
+    return np.exp(-2*α*(x̄**2-x**2))
+#    return np.exp(-α*(x̄**2-x**2))
 
 ########### DEFINITION OF THE FORCE ############################
 def Force(x,α):
